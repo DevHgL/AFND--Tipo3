@@ -46,6 +46,7 @@ class AFND:
 
         return afnd
 
+    # Não funciona direito
     def exibirInformacoes(self):
         print("Estágios:", self.estados)
         print("Alfabeto:", self.alfabeto)
