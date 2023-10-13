@@ -7,5 +7,10 @@ for linha in AFND:
 
 AFND.close()
 
-for regra in regras:
-    print(regra)
+def afndParaGr3(regras):
+    estados = set(regras[0].split(','))
+    alfabeto = set(regras[1].split(' '))
+    estagioInicial = set(regras[2])
+    estagiosFinais = set(regras[3].split(' '))
+    transicoes = set(regras[4].split(' '))
+
