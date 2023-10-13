@@ -9,4 +9,3 @@ AFND.close()
 
 for regra in regras:
     print(regra)
-
