@@ -1,5 +1,5 @@
 AFND = open('arquivo.txt', 'r')
-regras = [] # regra 0 = estagios, regra 1 = alfabeto, regra 2 = estagio inicial,
+regras = [] # regra 0 = estados, regra 1 = alfabeto, regra 2 = estagio inicial,
             # regra 3 = estagios finais, regra 4 = transições
 for linha in AFND:
     linha = linha.strip()
@@ -7,6 +7,10 @@ for linha in AFND:
 
 AFND.close()
 
-for regra in regras:
-    print(regra)
+def afndParaGr3(regras):
+    estados = set(regras[0].split(','))
+    alfabeto = set(regras[1].split(' '))
+    estagioInicial = set(regras[2])
+    estagiosFinais = set(regras[3].split(' '))
+    transicoes = set(regras[4].split(' '))
 
