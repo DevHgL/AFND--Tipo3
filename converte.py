@@ -2,12 +2,19 @@ import sys
 from funcoesAuxiliares import limpaTela, filtra, escreve
 
 def leAutomato(nomeArquivo):
-    if not ".txt" in nomeArquivo[-4:]:
-        nomeArquivo += ".txt"
-    arquivo = open(nomeArquivo, 'r')
-    automato = arquivo.readlines()
-    arquivo.close()
-    return filtra(automato) # Retorna o automato ja sem quebra de linha, espaços, etc
+    try:
+        if not nomeArquivo.endswith(".txt"):  # Retira a obrigação de escrever o formato ".txt".
+            nomeArquivo += ".txt"
+        arquivo = open(nomeArquivo, 'r')
+        automato = arquivo.readlines()
+        arquivo.close()
+        return filtra(automato)  # Retorna o autômato já sem quebra de linha, espaços, etc
+    except FileNotFoundError:
+        print(f"O arquivo '{nomeArquivo}' não foi encontrado.")
+        return None
+    except Exception as e:
+        print(f"Ocorreu um erro ao ler o arquivo: {e}")
+        return None
 
 def trocaInicio(gramatica, novoInicio):
     # Substitui o símbolo de início 1 pelo novo símbolo
@@ -64,20 +71,21 @@ def fazConversao(automato):
 def main():
     num = 9
     while True:
-        nomeArquivo = input("Digite o nome do arquivo: ")
-
+        nomeArquivo = input("Digite o nome do arquivo ( .txt é opcional!): ")
         automato = leAutomato(nomeArquivo)
-        print("\nAFND:")
-        escreve(automato)
+        if automato is not None:
+            print("\nAFND:")
+            escreve(automato)
 
-        gramatica = fazConversao(automato)
-        print("\nGramatica:")
-        escreve(gramatica)
+            gramatica = fazConversao(automato)
+            print("\nGramatica:")
+            escreve(gramatica)
 
-        num = input("Digite 1 caso deseje continuar e 0 caso deseje parar: ")
+        num = input("Digite [1] caso deseje continuar e [0] caso deseje parar: ")
         limpaTela()
         if (num == "0"):
             break
+
 
     print("Encerrando Programa!")
 
